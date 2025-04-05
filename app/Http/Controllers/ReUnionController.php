@@ -16,6 +16,7 @@ class ReUnionController extends Controller
         $profession_id = $request->input('profession_id');
         $payment_method = $request->input('payment_method');
         $t_shirt_size = $request->input('t_shirt_size'); 
+        $status = $request->input('status');
         $query = Reunion::with('student');
 
         // Apply filters dynamically
@@ -44,6 +45,10 @@ class ReUnionController extends Controller
         }
         if ($t_shirt_size) {
             $query->where('t_shirt_size', $t_shirt_size);
+        }
+
+        if ($status) { 
+            $query->where('is_active', $status);
         }
  
         $perPage = $request->input('per_page', 20);   
@@ -76,6 +81,16 @@ class ReUnionController extends Controller
             't_shirt_size' => $request->t_shirt_size,
         ]); 
         return success_response(null, "Your request has been submitted. We will contact you as soon as possible.");
+    } 
+
+    public function approve($id){
+        $reunion = Reunion::find($id);
+        if(!$reunion){
+            return error_response(null,404,"Not found");
+        } 
+        $reunion->is_active = true;
+        $reunion->save();
+        return success_response(null,"Payment has been approved");
     }
 
 }

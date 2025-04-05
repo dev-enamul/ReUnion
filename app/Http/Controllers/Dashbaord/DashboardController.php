@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Dashbaord;
 
 use App\Http\Controllers\Controller;
 use App\Models\FollowupCategory;
+use App\Models\Reunion;
 use App\Models\SalesPipeline;
+use App\Models\Student;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Exception;
@@ -12,6 +14,12 @@ use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
+
+    public function dashboardData(){
+        $total_student = Student::where('is_active')->get();
+        $total_registerd = Reunion::where('is_active')->get();
+    }
+
     public function leadChart(){  
     for ($i = 5; $i >= 0; $i--) {
             $startDate = Carbon::now()->subMonths($i)->startOfMonth()->toDateString();

@@ -51,14 +51,16 @@ use Illuminate\Support\Facades\Route;
 */  
 
 Route::post('login', [AuthController::class, 'login'])->name('login');
-Route::get('roles',RoleApiController::class); 
+Route::get('roles',RoleApiController::class);
 
 // Location 
 Route::get('countries',CountryApiController::class);
 Route::get('divisions',DivisionApiController::class);
 Route::get('districts',DistrictApiController::class);
 Route::get('upazilas',UpazilaApiController::class);
-Route::get('unions',UnionApiController::class); 
+Route::get('unions',UnionApiController::class);  
+
+Route::get('dashboard-data',[DashboardController::class,'dashboardData']);
  
 Route::middleware(['auth:sanctum'])->group(function () {
     // Route::get('dashboard-chard')
@@ -128,7 +130,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('student-find-phone',[StudentController::class,'findByPhone']);
 
     Route::post('reunion-register',[ReUnionController::class,'register']);
-    Route::get('reunion-list',[ReUnionController::class,'index']);
+    Route::get('reunion-list',[ReUnionController::class,'index']); 
+    Route::get('approved-reunion-student/{id}',[ReUnionController::class,'approve']); 
 });
 
 
