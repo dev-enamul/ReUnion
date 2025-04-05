@@ -25,6 +25,7 @@ use App\Http\Controllers\Notification\NotificationController;
 use App\Http\Controllers\Payment\PaymentController;
 use App\Http\Controllers\Payment\PaymentScheduleController;
 use App\Http\Controllers\ProfessionController;
+use App\Http\Controllers\ReUnionController;
 use App\Http\Controllers\Salese\SaleseController;
 use App\Http\Controllers\Service\ServiceController;
 use App\Http\Controllers\Setting\FollowupCategoryController;
@@ -123,6 +124,11 @@ Route::middleware(['auth:sanctum'])->group(function () {
     // ReUnion Madrasha
     Route::resource('profession',ProfessionController::class);
     Route::post('student-register',[StudentController::class,'register']);
+    Route::get('student-list',[StudentController::class,'index']);
+    Route::get('student-find-phone',[StudentController::class,'findByPhone']);
+
+    Route::post('reunion-register',[ReUnionController::class,'register']);
+    Route::get('reunion-list',[ReUnionController::class,'index']);
 });
 
 

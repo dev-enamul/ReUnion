@@ -31,6 +31,7 @@ return new class extends Migration
             $table->string('permanent_post')->nullable();
             $table->string('permanent_upazila')->nullable();
             $table->string('permanent_zila')->nullable();
+            $table->boolean('is_active')->default(true);  
             $table->timestamps();
         });
     }

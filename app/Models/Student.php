@@ -25,5 +25,6 @@ class Student extends Model
         'permanent_post',
         'permanent_upazila',
         'permanent_zila',
+        'is_active',
     ];
 }
