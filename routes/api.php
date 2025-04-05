@@ -24,9 +24,11 @@ use App\Http\Controllers\Lead\RejectionController;
 use App\Http\Controllers\Notification\NotificationController;
 use App\Http\Controllers\Payment\PaymentController;
 use App\Http\Controllers\Payment\PaymentScheduleController;
+use App\Http\Controllers\ProfessionController;
 use App\Http\Controllers\Salese\SaleseController;
 use App\Http\Controllers\Service\ServiceController;
 use App\Http\Controllers\Setting\FollowupCategoryController;
+use App\Http\Controllers\StudentController;
 use App\Http\Controllers\User\EducationController;
 use App\Http\Controllers\User\UserAddressController;
 use App\Http\Controllers\User\UserContactController;
@@ -115,7 +117,12 @@ Route::middleware(['auth:sanctum'])->group(function () {
     
     Route::get('customer-lead-history/{user_id}', CustomerLeadHistoryController::class);
     Route::get('lead-report',[CustomerLeadHistoryController::class,'leadReport']);
-    Route::get('dashbaord-card',[DashboardController::class,'cardData']);
+    Route::get('dashbaord-card',[DashboardController::class,'cardData']); 
+
+ 
+    // ReUnion Madrasha
+    Route::resource('profession',ProfessionController::class);
+    Route::post('student-register',[StudentController::class,'register']);
 });
 
 
