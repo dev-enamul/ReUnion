@@ -53,6 +53,10 @@ use Illuminate\Support\Facades\Route;
 Route::post('login', [AuthController::class, 'login'])->name('login');
 Route::get('roles',RoleApiController::class);
 
+Route::post('student-register',[StudentController::class,'register']);
+Route::get('student-find-phone',[StudentController::class,'findByPhone']);
+Route::post('reunion-register',[ReUnionController::class,'register']);
+
 // Location 
 Route::get('countries',CountryApiController::class);
 Route::get('divisions',DivisionApiController::class);
@@ -125,13 +129,11 @@ Route::middleware(['auth:sanctum'])->group(function () {
  
     // ReUnion Madrasha
     Route::resource('profession',ProfessionController::class);
-    Route::post('student-register',[StudentController::class,'register']);
-    Route::get('student-list',[StudentController::class,'index']);
-    Route::get('student-find-phone',[StudentController::class,'findByPhone']);
-
-    Route::post('reunion-register',[ReUnionController::class,'register']);
-    Route::get('reunion-list',[ReUnionController::class,'index']); 
-    Route::get('approved-reunion-student/{id}',[ReUnionController::class,'approve']); 
+    
+    Route::get('student-list',[StudentController::class,'index']); 
+    
+    Route::get('reunion-list',[ReUnionController::class,'index']);
+    Route::get('approved-reunion/{id}',[ReUnionController::class,'approve']);
 });
 
 
