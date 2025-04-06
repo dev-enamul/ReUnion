@@ -56,6 +56,7 @@ Route::get('roles',RoleApiController::class);
 Route::post('student-register',[StudentController::class,'register']);
 Route::get('student-find-phone',[StudentController::class,'findByPhone']);
 Route::post('reunion-register',[ReUnionController::class,'register']);
+Route::get('dashboard',[DashboardController::class,'dashboard']);
 
 // Location 
 Route::get('countries',CountryApiController::class);

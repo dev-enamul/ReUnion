@@ -27,4 +27,8 @@ class Student extends Model
         'permanent_zila',
         'is_active',
     ];
+
+    public function reunion(){
+        return $this->hasOne(Reunion::class);
+    }
 }

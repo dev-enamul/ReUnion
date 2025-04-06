@@ -71,10 +71,10 @@ class ReUnionController extends Controller
 
 
     public function register(Request $request)
-    { 
+    {
         Reunion::create([
             'student_id' => $request->student_id,
-            'fee' => $request->fee,
+            'fee' => 1000,
             'payment_method' => $request->payment_method,
             'payment_number' => $request->payment_number,
             'payment_photo' => $request->payment_photo,
@@ -90,7 +90,7 @@ class ReUnionController extends Controller
         } 
         $reunion->is_active = true;
         $reunion->save();
-        return success_response(null,"Payment has been approved");
+        return success_response(null,"Successfully approved");
     }
 
 }
