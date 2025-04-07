@@ -73,11 +73,16 @@ class ReUnionController extends Controller
 
     public function register(StoreReunionRequest $request)
     {
-        try { 
-            $paymentPhotoPath = null;
+        try {
+            $paymentPhotoPath = null; 
             if ($request->hasFile('payment_photo')) {
-                $paymentPhotoPath = $request->file('payment_photo')->store('uploads/payment_photos', 'public');
-            } 
+                $file = $request->file('payment_photo');
+                $filename = time() . '_' . $file->getClientOriginalName(); 
+                $path = $file->storeAs('uploads/payment_photos', $filename, 'public');
+ 
+                $paymentPhotoPath = asset('storage/' . $path);
+            }
+
             Reunion::create([
                 'student_id'      => $request->student_id,
                 'fee'             => 1000,
@@ -87,10 +92,12 @@ class ReUnionController extends Controller
                 't_shirt_size'    => $request->t_shirt_size,
             ]); 
             return success_response(null, "Your request has been submitted. We will contact you as soon as possible.");
-        } catch (\Exception $e) {  
-            return error_response($e->getMessage()); 
+
+        } catch (\Exception $e) {
+            return error_response($e->getMessage());
         }
     }
+
 
 
     public function approve($id){

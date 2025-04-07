@@ -53,42 +53,25 @@ class StudentController extends Controller
     }
     
 
-    public function register(StudentRegisterRequest $request)
-    {
-        try {
+    public function register(StudentRegisterRequest $request){ 
+        try{
             $input = $request->all();
-    
-            // Check if there is a file uploaded
             if ($request->hasFile('profile_picture')) {
                 $file = $request->file('profile_picture');
-    
-                // Generate a unique filename using the current timestamp and the original file name
                 $filename = time() . '_' . $file->getClientOriginalName();
-    
-                // Define the path where you want to store the file
-                $destinationPath = public_path('upload');  // 'public/upload' folder
-    
-                // Move the file to the desired folder
-                $file->move($destinationPath, $filename);
-    
-                // Generate the full URL for the uploaded file
-                $fileUrl = url('upload/' . $filename);  // full URL based on the public path
-    
-                // Store the full URL in the database
-                $input['profile_picture'] = $fileUrl;
+                $path = $file->storeAs('profile_pictures', $filename, 'public');
+
+                $fullUrl = asset('storage/' . $path);
+                $input['profile_picture'] = $fullUrl; 
+            }else{
+                $input['profile_picture'] = null;
             }
-    
-            // Create the student record
-            Student::create($input);
-    
-            // Return success response
-            return success_response(null, "Your registration has been successfully completed.");
-        } catch (Exception $e) {
-            // Catch any errors and return error response
+            Student::create($input); 
+            return success_response(null,"Your registration has been successfylly");
+        }catch(Exception $e){
             return error_response($e->getMessage());
         }
-    }
-    
+    } 
 
     public function findByPhone(Request $request){
         $phone = $request->phone;
