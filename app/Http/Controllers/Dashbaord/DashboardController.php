@@ -13,8 +13,7 @@ use Exception;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
-{
- 
+{ 
     public function dashboard(){
         $total_student = Student::count();
         $reunion_register = Reunion::where('is_active')->count();

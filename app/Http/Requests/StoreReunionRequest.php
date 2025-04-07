@@ -38,7 +38,7 @@ class StoreReunionRequest extends FormRequest
             'fee' => 'required|numeric',
             'payment_method' => 'required|string',
             'payment_number' => 'required|string',
-            'payment_photo' => 'required|url',   
+            'payment_photo' => 'required',   
             't_shirt_size' => 'required|string', 
         ];
     }

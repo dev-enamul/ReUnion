@@ -36,7 +36,7 @@ class StudentRegisterRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'profile_picture' => 'nullable',
             'phone' => 'required|string|max:20',
             'guardiant' => 'nullable|string|max:255',
             'passing_year' => 'nullable|integer',

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreReunionRequest;
 use App\Models\Reunion;
 use Illuminate\Http\Request;
 
@@ -70,18 +71,27 @@ class ReUnionController extends Controller
 
 
 
-    public function register(Request $request)
+    public function register(StoreReunionRequest $request)
     {
-        Reunion::create([
-            'student_id' => $request->student_id,
-            'fee' => 1000,
-            'payment_method' => $request->payment_method,
-            'payment_number' => $request->payment_number,
-            'payment_photo' => $request->payment_photo,
-            't_shirt_size' => $request->t_shirt_size,
-        ]); 
-        return success_response(null, "Your request has been submitted. We will contact you as soon as possible.");
-    } 
+        try { 
+            $paymentPhotoPath = null;
+            if ($request->hasFile('payment_photo')) {
+                $paymentPhotoPath = $request->file('payment_photo')->store('uploads/payment_photos', 'public');
+            } 
+            Reunion::create([
+                'student_id'      => $request->student_id,
+                'fee'             => 1000,
+                'payment_method'  => $request->payment_method,
+                'payment_number'  => $request->payment_number,
+                'payment_photo'   => $paymentPhotoPath,
+                't_shirt_size'    => $request->t_shirt_size,
+            ]); 
+            return success_response(null, "Your request has been submitted. We will contact you as soon as possible.");
+        } catch (\Exception $e) {  
+            return error_response($e->getMessage()); 
+        }
+    }
+
 
     public function approve($id){
         $reunion = Reunion::find($id);
