@@ -24,16 +24,16 @@ class DashboardController extends Controller
         $reunion_unregister = Student::whereDoesntHave('reunion')->count();
      
         $topPassingYearStudents = DB::table('students')
-            ->select('passing_year', DB::raw('count(*) as student_count'))
-            ->groupBy('passing_year')
+            ->select('dakhil_passing_year', DB::raw('count(*) as student_count'))
+            ->groupBy('dakhil_passing_year')
             ->orderByDesc('student_count')
             ->limit(10)
             ->get();
      
         $topBatchReunion = DB::table('reunions')
             ->join('students', 'reunions.student_id', '=', 'students.id')
-            ->select('students.passing_year', DB::raw('count(reunions.id) as reunion_count'))
-            ->groupBy('students.passing_year')
+            ->select('students.dakhil_passing_year', DB::raw('count(reunions.id) as reunion_count'))
+            ->groupBy('students.dakhil_passing_year')
             ->orderByDesc('reunion_count')
             ->limit(5)
             ->get();
@@ -47,7 +47,7 @@ class DashboardController extends Controller
             $currentYear = now()->year;
      
             for ($year = $currentYear; $year >= $first_batch_year; $year--) { 
-                $studentCount = Student::where('passing_year', $year)->count();
+                $studentCount = Student::where('dakhil_passing_year', $year)->count();
      
                 $reunionCount = Reunion::join('students', 'reunions.student_id', '=', 'students.id')
                     ->where('students.dakhil_passing_year', $year)
