@@ -65,8 +65,8 @@ class DashboardController extends Controller
             "total_student" => $total_student,
             "reunion_register" => $reunion_register,
             "reunion_unregister" => $reunion_unregister,
-            "topPassingYearStudents" => $topPassingYearStudents,
-            "topBatchReunion" => $topBatchReunion,
+            // "topPassingYearStudents" => $topPassingYearStudents,
+            // "topBatchReunion" => $topBatchReunion,
             "year_wise_data" => $yearWiseData,
         ]);
     }
