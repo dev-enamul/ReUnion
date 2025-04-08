@@ -73,7 +73,14 @@ class StudentController extends Controller
     
 
     public function register(StudentRegisterRequest $request){ 
-        try{
+        try{ 
+
+            $old_student = Student::where('phone', $request->phone)->first();
+            if ($old_student) {
+                return success_response($old_student, "You are already registered as a student.");
+            }
+
+
             $input = $request->all();
             if ($request->hasFile('profile_picture')) {
                 $file = $request->file('profile_picture');

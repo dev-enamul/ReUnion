@@ -79,7 +79,12 @@ class ReUnionController extends Controller
 
     public function register(StoreReunionRequest $request)
     {
-        try {
+        try { 
+            $old_reunion = Reunion::where('student_id', $request->student_id)->first();
+            if ($old_reunion) {
+                return success_response(null, "You have already registered for the reunion.");
+            }
+
             $paymentPhotoPath = null; 
             if ($request->hasFile('payment_photo')) {
                 $file = $request->file('payment_photo');
