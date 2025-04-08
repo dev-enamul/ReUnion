@@ -26,6 +26,10 @@ class StudentController extends Controller
             $query->where('fazil_passing_year', $request->fazil_passing_year);
         }
 
+        if ($request->filled('gender')) {
+            $query->where('gender', $request->gender);
+        }
+
         if ($request->filled('blood_group')) {
             $query->where('blood_group', $request->blood_group);
         }
@@ -81,8 +85,8 @@ class StudentController extends Controller
             }else{
                 $input['profile_picture'] = null;
             }
-            Student::create($input); 
-            return success_response(null,"Your registration has been successfylly");
+            $data = Student::create($input); 
+            return success_response($data,"Your registration has been successfylly");
         }catch(Exception $e){
             return error_response($e->getMessage());
         }

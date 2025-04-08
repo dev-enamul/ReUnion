@@ -13,7 +13,7 @@ class DistrictApiController extends Controller
         try {
             $keyword = $request->input('keyword', '');
             $divisionId = $request->input('division_id', null);
-            $data = District::select('id', 'name')
+            $data = District::select('id', 'name','bn_name')
                 ->when($divisionId, function ($query) use ($divisionId) {
                     return $query->where('division_id', $divisionId);
                 })

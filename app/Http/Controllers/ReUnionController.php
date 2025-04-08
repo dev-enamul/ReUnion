@@ -41,9 +41,12 @@ class ReUnionController extends Controller
             if ($request->filled('fazil_passing_year')) {
                 $q->where('fazil_passing_year', $request->fazil_passing_year);
             }
+            if ($request->filled('gender')) {
+                $q->where('gender', $request->fazil_passing_year);
+            }
             if ($request->filled('blood_group')) {
                 $q->where('blood_group', $request->blood_group);
-            }
+            }  
             if ($request->filled('phone')) {
                 $q->where('phone', 'like', '%' . $request->phone . '%');
             }
