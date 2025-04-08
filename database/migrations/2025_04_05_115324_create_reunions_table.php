@@ -17,11 +17,13 @@ return new class extends Migration
             $table->foreignId('student_id')->constrained('students')->onDelete('cascade');
          
             $table->float('fee')->comment('Registration or participation fee');
-            $table->string('payment_method')->comment('e.g., bKash, Nagad, Rocket');
-            $table->string('payment_number')->comment('Sender number used for payment');
-            $table->string('payment_photo')->comment('Screenshot or proof of payment');
+            $table->string('payment_method')->nullable()->comment('e.g., bKash, Nagad, Rocket');
+            $table->string('payment_number')->nullable();
+            $table->string('payment_photo')->nullable();
+            $table->string('payment_to')->nullable();
+            $table->boolean('is_interest_memorial')->default(false)->nullable();
          
-            $table->string('t_shirt_size')->comment('T-shirt size: S, M, L, XL, etc.');
+            $table->string('t_shirt_size')->nullable()->comment('T-shirt size: S, M, L, XL, etc.');
             $table->boolean('is_active')->default(false)->comment('Approved by admin');
         
             $table->timestamps();

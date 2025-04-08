@@ -29,6 +29,7 @@ use App\Http\Controllers\ReUnionController;
 use App\Http\Controllers\Salese\SaleseController;
 use App\Http\Controllers\Service\ServiceController;
 use App\Http\Controllers\Setting\FollowupCategoryController;
+use App\Http\Controllers\SettingController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\User\EducationController;
 use App\Http\Controllers\User\UserAddressController;
@@ -38,6 +39,7 @@ use App\Http\Controllers\User\UserUpdateController;
 use App\Models\FollowupCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Twilio\Rest\Insights\V1\SettingContext;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,7 +58,12 @@ Route::get('roles',RoleApiController::class);
 Route::post('student-register',[StudentController::class,'register']);
 Route::get('student-find-phone',[StudentController::class,'findByPhone']);
 Route::post('reunion-register',[ReUnionController::class,'register']);
+Route::get('student-list',[StudentController::class,'index']);
+Route::get('reunion-list',[ReUnionController::class,'index']);
+Route::resource('profession',ProfessionController::class);
+
 Route::get('dashboard',[DashboardController::class,'dashboard']);
+Route::get('basic/setting',[SettingController::class,'setting']);
 
 // Location 
 Route::get('countries',CountryApiController::class);
@@ -129,12 +136,10 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
  
     // ReUnion Madrasha
-    Route::resource('profession',ProfessionController::class);
     
-    Route::get('student-list',[StudentController::class,'index']); 
-    
-    Route::get('reunion-list',[ReUnionController::class,'index']);
+     
     Route::get('approved-reunion/{id}',[ReUnionController::class,'approve']);
+    Route::post('/basic/setting/update',[SettingController::class,'settingUpdate']); 
 });
 
 

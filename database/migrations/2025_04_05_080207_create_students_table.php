@@ -16,9 +16,16 @@ return new class extends Migration
             $table->string('name');
             $table->string('profile_picture')->nullable();
             $table->string('phone');
+            $table->string('whatsapp')->nullable(); 
             $table->string('guardiant')->nullable();
-            $table->integer('passing_year')->nullable();
-            $table->string('exam_name')->comment('Dakhil, Alim, Fazil')->nullable();
+            $table->string('gender')->nullable();
+            $table->string('blood_group')->nullable(); 
+
+            $table->string('dakhil_passing_year')->nullable();
+            $table->string('alim_passing_year')->nullable();
+            $table->string('fazil_passing_year')->nullable(); 
+            $table->string('max_education')->nullable();
+
             $table->foreignId('profession_id')->constrained('professions');
             $table->text('profession_details')->nullable();
 
@@ -31,7 +38,7 @@ return new class extends Migration
             $table->string('permanent_post')->nullable();
             $table->string('permanent_upazila')->nullable();
             $table->string('permanent_zila')->nullable();
-            $table->boolean('is_active')->default(true);  
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }

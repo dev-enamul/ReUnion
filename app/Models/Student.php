@@ -12,9 +12,14 @@ class Student extends Model
         'name',
         'profile_picture',
         'phone',
+        'whatsapp',
         'guardiant',
-        'passing_year',
-        'exam_name',
+        'gender',
+        'blood_group',
+        'dakhil_passing_year',
+        'alim_passing_year',
+        'fazil_passing_year',
+        'max_education',
         'profession_id',
         'profession_details',
         'present_village',
@@ -27,6 +32,7 @@ class Student extends Model
         'permanent_zila',
         'is_active',
     ];
+    
 
     public function reunion(){
         return $this->hasOne(Reunion::class);

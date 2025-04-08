@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class StoreReunionRequest extends FormRequest
+class SettingStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -20,7 +20,8 @@ class StoreReunionRequest extends FormRequest
                 'errors' => $validator->errors()
             ], 422)
         );
-    } 
+    }  
+
     public function authorize(): bool
     {
         return true;
@@ -34,11 +35,10 @@ class StoreReunionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'student_id' => 'required|exists:students,id',  
-            'payment_method' => 'required|string',
-            'payment_number' => 'required|string',
-            'payment_photo' => 'required',   
-            't_shirt_size' => 'required|string', 
+            'school_name'             => 'required', 
+            'first_batch_year'        => 'required|integer|min:1900|max:' . now()->year,
+            'fee'                     => 'required|numeric|min:0',
+            'event_date'              => 'required|date|after_or_equal:today',
         ];
     }
 }
