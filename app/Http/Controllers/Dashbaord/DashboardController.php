@@ -50,7 +50,7 @@ class DashboardController extends Controller
                 $studentCount = Student::where('passing_year', $year)->count();
      
                 $reunionCount = Reunion::join('students', 'reunions.student_id', '=', 'students.id')
-                    ->where('students.passing_year', $year)
+                    ->where('students.dakhil_passing_year', $year)
                     ->count();
      
                 $yearWiseData[] = [
